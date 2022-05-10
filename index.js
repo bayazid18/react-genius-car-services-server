@@ -52,6 +52,14 @@ async function run() {
     });
 
     // order collection api
+
+    app.get("/order", async (req, res) => {
+      const query = {};
+      const cursor = orderCollections.find(query);
+      const orders = await cursor.toArray();
+      res.send(orders);
+    });
+
     app.post("/order", async (req, res) => {
       const order = req.body;
       const result = await orderCollections.insertOne(order);
